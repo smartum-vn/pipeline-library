@@ -7,6 +7,11 @@ def checkLog(String stage) {
     }
 }
 
+def info(message) {
+    echo "INFO: ${message}"
+}
+
+
 def notifySlackStartStage(String stage) {
     def now = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone('UTC'))
     def msg = "*[${now}]*  `${env.JOB_NAME}` ${stage} `STARTED`"
