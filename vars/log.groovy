@@ -1,4 +1,3 @@
-#!/usr/bin/env groovy
 
 def checkLog(String stage) {
     step([$class: 'LogParserPublisher', failBuildOnError: true, parsingRulesPath: '/home/ubuntu/log-parser-rule', useProjectRule: false])
