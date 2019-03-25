@@ -1,4 +1,4 @@
-def call(String instanceId, String type, boolan stopAfterScaleDown) {
+def call(String instanceId, String type, boolean stopAfterScaleDown) {
 
     STATE = sh(returnStdout: true, script: "echo \$(aws ec2 describe-instances --instance-ids $instanceId --output text --query Reservations[*].Instances[*].State.Name)")
     TYPE = TYPE.replaceAll("\\s", "")
