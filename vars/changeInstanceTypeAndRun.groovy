@@ -1,10 +1,10 @@
 def call(String instanceId, String type) {
-    
+
     STATE = sh(returnStdout: true, script: "echo \$(aws ec2 describe-instances --instance-ids $instanceId --output text --query Reservations[*].Instances[*].State.Name)")
     TYPE = sh(returnStdout: true, script: "echo \$(aws ec2 describe-instances --instance-ids $instanceId --output text --query Reservations[*].Instances[*].InstanceType)")
-    STATE = STATE.replaceAll("\\s","")
-    TYPE = TYPE.replaceAll("\\s","")
-    
+    STATE = STATE.replaceAll("\\s", "")
+    TYPE = TYPE.replaceAll("\\s", "")
+
     if (TYPE != type) {
         if (STATE == "running") {
             sh "aws ec2 stop-instances --instance-ids $instanceId"
@@ -14,4 +14,10 @@ def call(String instanceId, String type) {
         sh "aws ec2 start-instances --instance-ids $instanceId"
         sh "aws ec2 wait instance-running --instance-ids $instanceId"
     }
+    
+    if (STATE != "running") {
+        sh "aws ec2 start-instances --instance-ids $instanceId"
+        sh "aws ec2 wait instance-running --instance-ids $instanceId"
+    }
+
 }
