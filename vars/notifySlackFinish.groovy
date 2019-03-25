@@ -1,5 +1,5 @@
 def call() {
     def msg = "*[${now}]*  `${env.JOB_NAME}` FINISHED"
-    slackSend baseUrl: env.SLACK_URL, channel:'backend_data-process' , message: msg, color: '#D4DADF',
+    slackSend baseUrl: env.SLACK_URL, channel:'backend-data-process' , message: msg, color: '#D4DADF',
         token: 'KTt42sxU8xU1jTF3Ix3pwI13'
 }
